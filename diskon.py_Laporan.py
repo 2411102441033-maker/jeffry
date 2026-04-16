@@ -1,27 +1,35 @@
-# hitung harga
-def hitung(a, b):
-    c = a - (a * (b / 100))
-    return c
+// ================================
+// KALKULATOR DISKON - CLEAN CODE
+// ================================
 
-# cek murah atau tidak
-def cek(x):
-    if x < 50000:
-        return "Murah"
-    else:
-        return "Mahal"
+const BATAS_HARGA_MURAH = 50000;
 
-# main
-h = 100000
-d = 20
-hf = hitung(h, d)
-status = cek(hf)
-print("Harga akhir:", hf)
-print("Status:", status)
+function hitungHargaSetelahDiskon(hargaAwal, persenDiskon) {
+    const potongan = hargaAwal * (persenDiskon / 100);
+    return hargaAwal - potongan;
+}
 
-# duplikasi logika lagi di bawah
-h2 = 200000
-d2 = 30
-hf2 = hitung(h2, d2)
-status2 = cek(hf2)
-print("Harga akhir 2:", hf2)
-print("Status 2:", status2)
+function tentukanStatusHarga(hargaAkhir) {
+    return hargaAkhir < BATAS_HARGA_MURAH ? "Murah" : "Mahal";
+}
+
+function tampilkanHasil(hargaAwal, persenDiskon) {
+    const hargaAkhir = hitungHargaSetelahDiskon(hargaAwal, persenDiskon);
+    const status = tentukanStatusHarga(hargaAkhir);
+
+    console.log(`Harga awal: Rp${hargaAwal}`);
+    console.log(`Diskon: ${persenDiskon}%`);
+    console.log(`Harga akhir: Rp${hargaAkhir}`);
+    console.log(`Status: ${status}`);
+    console.log("------------------------");
+}
+
+// Data transaksi (bisa dikembangkan dari array/API)
+const transaksiList = [
+    { hargaAwal: 100000, diskon: 20 },
+    { hargaAwal: 200000, diskon: 30 }
+];
+
+transaksiList.forEach(transaksi => {
+    tampilkanHasil(transaksi.hargaAwal, transaksi.diskon);
+});
